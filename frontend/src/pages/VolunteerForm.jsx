@@ -24,9 +24,14 @@ const VolunteerForm = () => {
     try {
       const response = await api.post('/volunteers', formData);
       const ticketId = response.data.volunteer?.ticketId || 'CB-UNKNOWN';
-      toast.success(`Registration Confirmed! Ticket ID: ${ticketId}`, { id: loadingToast, duration: 5000 });
-      setTimeout(() => toast.success(`Confirmation email sent to ${formData.email}`), 500);
-      setTimeout(() => toast.success('NGO verification team notified'), 1000);
+      const emailSent = response.data.emailSent;
+      
+      if (emailSent) {
+        toast.success(`Registration Confirmed. Confirmation email sent. (Ticket: ${ticketId})`, { id: loadingToast, duration: 5000 });
+      } else {
+        toast.success(`Registration saved successfully. Email notification unavailable. (Ticket: ${ticketId})`, { id: loadingToast, duration: 5000, icon: '⚠️' });
+      }
+      setTimeout(() => toast.success('NGO verification team notified'), 500);
       setFormData(initialState);
     } catch (error) {
       console.error(error);

@@ -1,7 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
+const { sendEmail, getBaseEmailTemplate } = require('./emailService');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -74,7 +76,7 @@ const generateSummary = (type, data, finalUrgency) => {
   return '';
 };
 
-app.post('/api/requests', (req, res) => {
+app.post('/api/requests', async (req, res) => {
   const data = readData();
   
   // AI processing
@@ -114,10 +116,52 @@ app.post('/api/requests', (req, res) => {
   data.requests.push(newRequest);
   addActivity(data, finalUrgency === 'High' ? 'alert' : 'info', `New ${finalUrgency} priority patient: ${req.body.name}`);
   writeData(data);
-  res.status(201).json({ message: 'Request analyzed and logged successfully.', request: newRequest });
+  
+  // Phase 2: Send Email Notifications
+  let emailSent = false;
+  
+  try {
+    // 1. Alert Admin
+    const adminEmail = process.env.ADMIN_EMAIL;
+    if (adminEmail) {
+      const adminSubject = `🚨 New Emergency Patient Request - CareBridge`;
+      const adminHtml = getBaseEmailTemplate(
+        'New Emergency Patient Request',
+        `<p><strong>Patient Name:</strong> ${req.body.name}</p>
+         <p><strong>Age:</strong> ${req.body.age}</p>
+         <p><strong>City:</strong> ${req.body.city}</p>
+         <p><strong>Medical Need:</strong> ${req.body.medicalNeed}</p>
+         <p><strong>Urgency:</strong> <span style="color: red; font-weight: bold;">${finalUrgency}</span></p>
+         <div style="background-color: #f3f4f6; padding: 12px; margin-top: 16px; border-radius: 6px; border-left: 4px solid #2563eb;">
+           <p style="margin: 0;"><strong>Ticket ID:</strong> ${ticketId}</p>
+           <p style="margin: 4px 0 0 0;"><strong>Submitted:</strong> ${newRequest.timestamp}</p>
+         </div>`
+      );
+      await sendEmail(adminEmail, adminSubject, adminHtml);
+    }
+
+    // 2. Confirm to Patient
+    if (req.body.email) {
+      const patientSubject = `✅ CareBridge Request Received`;
+      const patientHtml = getBaseEmailTemplate(
+        'Request Received Successfully',
+        `<p>Hello <strong>${req.body.name}</strong>,</p>
+         <p>Your healthcare support request has been securely logged in our system.</p>
+         <div style="background-color: #f3f4f6; padding: 12px; margin-top: 16px; margin-bottom: 16px; border-radius: 6px; border-left: 4px solid #10b981;">
+           <p style="margin: 0; font-size: 18px;"><strong>Ticket ID:</strong> ${ticketId}</p>
+         </div>
+         <p>Our team will review your requirement for ${req.body.medicalNeed} and connect support soon.</p>`
+      );
+      emailSent = await sendEmail(req.body.email, patientSubject, patientHtml);
+    }
+  } catch (error) {
+    console.error("Email failed:", error.message);
+  }
+
+  res.status(201).json({ message: 'Request analyzed and logged successfully.', request: newRequest, emailSent });
 });
 
-app.post('/api/volunteers', (req, res) => {
+app.post('/api/volunteers', async (req, res) => {
   const data = readData();
   const ticketId = `CB-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
   const newVolunteer = {
@@ -131,7 +175,42 @@ app.post('/api/volunteers', (req, res) => {
   data.volunteers.push(newVolunteer);
   addActivity(data, 'user-plus', `New volunteer joined: ${req.body.name} (${req.body.skill})`);
   writeData(data);
-  res.status(201).json({ message: 'Registration verified. Welcome to CareBridge.', volunteer: newVolunteer });
+
+  // Phase 3: Send Email Notifications
+  let emailSent = false;
+
+  try {
+    const adminEmail = process.env.ADMIN_EMAIL;
+    if (adminEmail) {
+      const adminSubject = `🩺 New Volunteer Joined - CareBridge`;
+      const adminHtml = getBaseEmailTemplate(
+        'New Volunteer Registration',
+        `<p><strong>Name:</strong> ${req.body.name}</p>
+         <p><strong>Skill:</strong> ${req.body.skill}</p>
+         <p><strong>City:</strong> ${req.body.city}</p>
+         <p><strong>Availability:</strong> ${req.body.availability}</p>
+         <div style="background-color: #f3f4f6; padding: 12px; margin-top: 16px; border-radius: 6px; border-left: 4px solid #10b981;">
+           <p style="margin: 0;"><strong>Ticket ID:</strong> ${ticketId}</p>
+         </div>`
+      );
+      await sendEmail(adminEmail, adminSubject, adminHtml);
+    }
+
+    if (req.body.email) {
+      const volSubject = `✅ Welcome to CareBridge, ${req.body.name}`;
+      const volHtml = getBaseEmailTemplate(
+        'Registration Confirmed',
+        `<p>Hello <strong>${req.body.name}</strong>,</p>
+         <p>Thank you for joining CareBridge as a volunteer. Your dedication as a ${req.body.skill} in ${req.body.city} will help save lives.</p>
+         <p>We will contact you via email or phone when a high-priority match requires your assistance.</p>`
+      );
+      emailSent = await sendEmail(req.body.email, volSubject, volHtml);
+    }
+  } catch (error) {
+    console.error("Email failed:", error.message);
+  }
+
+  res.status(201).json({ message: 'Registration verified. Welcome to CareBridge.', volunteer: newVolunteer, emailSent });
 });
 
 app.put('/api/requests/:id/status', (req, res) => {

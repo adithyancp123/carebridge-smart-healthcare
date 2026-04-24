@@ -27,3 +27,8 @@ dist-ssr
 backend/data.json
 screenshots/*
 !screenshots/.gitkeep
+
+# Environment variables
+.env
+.env.local
+backend/.env

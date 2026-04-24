@@ -24,9 +24,14 @@ const PatientForm = () => {
     try {
       const response = await api.post('/requests', formData);
       const ticketId = response.data.request?.ticketId || 'CB-UNKNOWN';
-      toast.success(`Request Confirmed! Ticket ID: ${ticketId}`, { id: loadingToast, duration: 5000 });
-      setTimeout(() => toast.success(`Confirmation email sent to ${formData.email}`), 500);
-      setTimeout(() => toast.success('NGO emergency team notified'), 1000);
+      const emailSent = response.data.emailSent;
+      
+      if (emailSent) {
+        toast.success(`Request submitted successfully. Confirmation email sent. (Ticket: ${ticketId})`, { id: loadingToast, duration: 5000 });
+      } else {
+        toast.success(`Request saved successfully. Email notification unavailable. (Ticket: ${ticketId})`, { id: loadingToast, duration: 5000, icon: '⚠️' });
+      }
+      setTimeout(() => toast.success('NGO emergency team notified'), 500);
       setFormData(initialState); // Clear form
     } catch (error) {
       console.error(error);
