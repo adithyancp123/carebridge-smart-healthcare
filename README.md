@@ -29,6 +29,7 @@ During emergencies, many people struggle to quickly find help for:
 CareBridge aims to simplify this process through an easy web-based platform.
 
 ---
+<img width="1891" height="959" alt="Screenshot 2026-04-24 191206" src="https://github.com/user-attachments/assets/925b1602-92ac-48e8-9881-daa84ed445b1" />
 
 ## Features
 
@@ -40,6 +41,7 @@ Users can submit emergency healthcare requests with:
 - Location
 - Medical need
 - Urgency level
+<img width="1895" height="970" alt="Screenshot 2026-04-24 191229" src="https://github.com/user-attachments/assets/458f5d9d-7e6f-4786-8c20-1e2b6d5ab6ba" />
 
 ### Volunteer Registration Form
 Volunteers can register with:
@@ -49,9 +51,11 @@ Volunteers can register with:
 - Skills
 - Availability
 - City / Area
+<img width="1900" height="969" alt="Screenshot 2026-04-24 191246" src="https://github.com/user-attachments/assets/36e9fcf5-c403-401e-bcf9-d190a73e1cbd" />
 
 ### Dashboard
 Basic request and volunteer data view for monitoring.
+<img width="1900" height="963" alt="Screenshot 2026-04-24 191302" src="https://github.com/user-attachments/assets/5cd3c026-c148-429a-ae84-f7684d9cfacf" />
 
 ### Responsive UI
 Modern clean interface optimized for desktop and mobile.
