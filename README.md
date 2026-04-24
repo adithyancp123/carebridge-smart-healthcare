@@ -1,132 +1,118 @@
-# CareBridge Smart Healthcare
+# CareBridge – Mini Healthcare Support Web App
 
-> Bridging the gap between patients in urgent need and verified volunteers through intelligent healthcare support workflows.
+CareBridge is a concept-level healthcare support platform built to connect patients in urgent need with volunteers and NGOs quickly through a simple digital system. The project was created as part of an internship assignment focused on building a healthcare support web app with one AI or automation feature.
 
-![React](https://img.shields.io/badge/Frontend-React%2019-blue)
-![Node.js](https://img.shields.io/badge/Backend-Node.js-green)
-![Express](https://img.shields.io/badge/API-Express-black)
-![TailwindCSS](https://img.shields.io/badge/UI-TailwindCSS-38BDF8)
-![Status](https://img.shields.io/badge/Build-Production%20Ready-success)
+## Live Demo
 
----
+Frontend (Vercel):  
+https://carebridge-smart-healthcare.vercel.app
 
-## 📌 Overview
+Backend API (Render):  
+https://carebridge-backend-e28k.onrender.com
 
-**CareBridge Smart Healthcare** is a full-stack healthcare assistance platform built to support NGOs, volunteer organizations, and emergency support teams.
+## GitHub Repository
 
-The platform enables:
-
-- Patients to request urgent healthcare assistance
-- Volunteers to register their availability and skills
-- Administrators to monitor requests in real time
-- Smart priority handling for emergency cases
-- Analytics-driven decision making
-
-CareBridge is designed with a modern product mindset, combining premium UI/UX with practical workflow automation.
+https://github.com/adithyancp123/carebridge-smart-healthcare
 
 ---
 
-## ✨ Core Features
+## Problem Statement
 
-### 🏥 Patient Support System
-Users can submit healthcare assistance requests with urgency level, city, medical need, and contact details.
+During emergencies, many people struggle to quickly find help for:
 
-### 🤝 Volunteer Registration
-Doctors, nurses, drivers, caretakers, and helpers can register their availability.
+- Oxygen / medicines
+- Blood donation
+- Transport support
+- Volunteer assistance
+- Emergency coordination
 
-### 🧠 Smart Priority Engine
-Requests are automatically prioritized based on urgency and medical keywords.
-
-Examples:
-
-- Blood required urgently
-- Surgery support needed
-- Oxygen required
-- Emergency transport
-
-### 📊 Admin Dashboard
-A centralized control panel with:
-
-- Total requests
-- Total volunteers
-- Critical requests
-- Live metrics
-- Search & filters
-- Status tracking
-
-### 📈 Analytics Center
-Interactive charts for:
-
-- Requests by city
-- Urgency distribution
-- Volunteer skill categories
-- Status breakdown
-
-### 📁 Export System
-Admins can export data instantly:
-
-- CSV Reports
-- PDF Summaries
-
-### 🌙 Premium Dark Mode
-Production-grade theme engine with:
-
-- Persistent theme preference
-- No flash on load
-- Fully themed charts, cards, forms, and navbar
-
-### 🔔 Notifications & Activity Feed
-Track platform activity in real time:
-
-- New patient requests
-- Volunteer joins
-- Priority alerts
-- Request resolution updates
+CareBridge aims to simplify this process through an easy web-based platform.
 
 ---
 
-## 🚀 Tech Stack
+## Features
 
-## Frontend
+### Patient Support Form
+Users can submit emergency healthcare requests with:
 
-- React 19
+- Name
+- Contact details
+- Location
+- Medical need
+- Urgency level
+
+### Volunteer Registration Form
+Volunteers can register with:
+
+- Name
+- Contact info
+- Skills
+- Availability
+- City / Area
+
+### Dashboard
+Basic request and volunteer data view for monitoring.
+
+### Responsive UI
+Modern clean interface optimized for desktop and mobile.
+
+---
+
+## AI / Automation Idea Implemented
+
+### Smart Matching AI Concept
+The platform introduces a **Live Matching AI Engine** concept that can automatically connect nearby volunteers to urgent patient requests based on:
+
+- Location
+- Availability
+- Urgency priority
+- Type of help needed
+
+### Automated Email Notification System
+Integrated using **Resend API**:
+
+- Admin receives emergency alerts
+- Users receive confirmation emails
+- Graceful fallback if email server is unavailable
+
+---
+
+## NGO Use Case
+
+NGOs and support organizations can use CareBridge to:
+
+- Collect emergency requests digitally
+- Manage volunteer registrations
+- Get real-time alerts
+- Respond faster during crisis situations
+- Improve support coordination
+
+---
+
+## Tech Stack
+
+### Frontend
+- React.js
 - Vite
-- Tailwind CSS v4
-- Framer Motion
-- Recharts
-- Lucide React
-- jsPDF
+- CSS / Modern UI Components
 
-## Backend
-
+### Backend
 - Node.js
 - Express.js
-- JSON File Storage
-- REST API Architecture
-- CORS Enabled
+
+### Deployment
+- Vercel (Frontend)
+- Render (Backend)
+
+### APIs / Tools
+- Resend Email API
 
 ---
 
-## 🧱 Project Architecture
+## Project Structure
 
-```text
+```bash
 carebridge-smart-healthcare/
-│
-├── backend/
-│   ├── server.js
-│   ├── data.json
-│   └── package.json
-│
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── api.js
-│   │   ├── App.jsx
-│   │   ├── main.jsx
-│   │   └── index.css
-│   │
-│   ├── vite.config.js
-│   └── package.json
-│
-└── README.md
+│── frontend/
+│── backend/
+│── README.md
