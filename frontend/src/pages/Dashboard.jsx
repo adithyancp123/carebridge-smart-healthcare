@@ -5,7 +5,7 @@ import { HeartPulse, Users, AlertTriangle, Clock, Search, MapPin, CheckCircle, D
 import toast from 'react-hot-toast';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip as RechartsTooltip, ResponsiveContainer, Legend } from 'recharts';
 import jsPDF from 'jspdf';
-import 'jspdf-autotable';
+import autoTable from 'jspdf-autotable';
 
 const Dashboard = () => {
   const [data, setData] = useState({ requests: [], volunteers: [] });
@@ -46,7 +46,8 @@ const Dashboard = () => {
       ...list.map(item => headers.map(header => `"${(item[header] || '').toString().replace(/"/g, '""')}"`).join(','))
     ].join('\n');
     
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const BOM = "\uFEFF";
+    const blob = new Blob([BOM + csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
@@ -62,15 +63,28 @@ const Dashboard = () => {
     doc.setFontSize(20);
     doc.text('CareBridge Analytics Report', 14, 22);
     
+    doc.setFontSize(10);
+    doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 14, 30);
+    
     doc.setFontSize(12);
-    doc.text(`Total Requests: ${safeRequests.length}`, 14, 32);
-    doc.text(`Total Volunteers: ${safeVolunteers.length}`, 14, 40);
-    doc.text(`Critical Cases: ${safeRequests.filter(r => r.urgency === 'High').length}`, 14, 48);
+    doc.text(`Total Requests: ${safeRequests.length}`, 14, 40);
+    doc.text(`Total Volunteers: ${safeVolunteers.length}`, 14, 48);
+    doc.text(`Critical Cases: ${safeRequests.filter(r => r.urgency === 'High').length}`, 14, 56);
 
-    doc.autoTable({
-      startY: 60,
-      head: [['Patient', 'City', 'Need', 'Urgency', 'Status']],
+    autoTable(doc, {
+      startY: 65,
+      head: [['Patient Requests', 'City', 'Need', 'Urgency', 'Status']],
       body: safeRequests.map(r => [r.name, r.city, r.medicalNeed, r.urgency, r.status || 'Pending']),
+      theme: 'grid',
+      headStyles: { fillColor: [37, 99, 235] }
+    });
+
+    autoTable(doc, {
+      startY: doc.lastAutoTable.finalY + 15,
+      head: [['Verified Volunteers', 'City', 'Skill', 'Availability']],
+      body: safeVolunteers.map(v => [v.name, v.city, v.skill, v.availability]),
+      theme: 'grid',
+      headStyles: { fillColor: [16, 185, 129] }
     });
 
     doc.save('CareBridge_Report.pdf');
@@ -96,8 +110,27 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-[calc(100vh-64px)] flex items-center justify-center bg-gray-50 dark:bg-[#0B1220]">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-blue-600 border-t-transparent"></div>
+      <div className="min-h-[calc(100vh-64px)] bg-gray-50 dark:bg-[#0B1220] py-10 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto space-y-8 animate-pulse">
+          <div className="flex justify-between items-center">
+            <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-48"></div>
+            <div className="flex gap-4">
+              <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-64"></div>
+              <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-32"></div>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[1, 2, 3, 4].map(i => (
+              <div key={i} className="h-28 bg-white dark:bg-[#1F2937] rounded-2xl shadow-sm border border-gray-100 dark:border-[#374151]"></div>
+            ))}
+          </div>
+          <div className="h-12 bg-gray-200 dark:bg-gray-700 rounded w-full mb-6"></div>
+          <div className="space-y-4">
+            {[1, 2, 3, 4, 5].map(i => (
+              <div key={i} className="h-20 bg-white dark:bg-[#1F2937] rounded-xl shadow-sm border border-gray-100 dark:border-[#374151]"></div>
+            ))}
+          </div>
+        </div>
       </div>
     );
   }
@@ -125,6 +158,21 @@ const Dashboard = () => {
   const skillData = Object.entries(safeVolunteers.reduce((acc, v) => { acc[v.skill] = (acc[v.skill] || 0) + 1; return acc; }, {})).map(([name, value]) => ({ name, value }));
   const statusData = Object.entries(safeRequests.reduce((acc, r) => { const st = r.status || 'Pending'; acc[st] = (acc[st] || 0) + 1; return acc; }, {})).map(([name, value]) => ({ name, value }));
   const COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
+
+  const handleCardClick = (type) => {
+    if (type === 'patients') {
+      setActiveTab('patients');
+    } else if (type === 'volunteers') {
+      setActiveTab('volunteers');
+    } else if (type === 'critical') {
+      setActiveTab('patients');
+      setFilterUrgency('High');
+      setTimeout(() => document.getElementById('tabs-section')?.scrollIntoView({ behavior: 'smooth' }), 100);
+    } else if (type === 'cities') {
+      setActiveTab('analytics');
+      setTimeout(() => document.getElementById('tabs-section')?.scrollIntoView({ behavior: 'smooth' }), 100);
+    }
+  };
 
   return (
     <div className="min-h-[calc(100vh-64px)] bg-gray-50 dark:bg-[#0B1220] py-10 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
@@ -198,28 +246,28 @@ const Dashboard = () => {
 
         {/* Metric Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <div className="bg-white dark:bg-[#1F2937] p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-[#374151] flex flex-col transition-colors">
+          <motion.div whileHover={{ y: -5 }} onClick={() => handleCardClick('patients')} className="bg-white dark:bg-[#1F2937] p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-[#374151] flex flex-col transition-all cursor-pointer hover:shadow-lg hover:border-blue-200 dark:hover:border-blue-800">
             <div className="text-gray-500 dark:text-gray-400 font-medium mb-1">Total Requests</div>
             <div className="text-3xl font-bold text-gray-900 dark:text-white">{safeRequests.length}</div>
-          </div>
-          <div className="bg-white dark:bg-[#1F2937] p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-[#374151] flex flex-col transition-colors">
+          </motion.div>
+          <motion.div whileHover={{ y: -5 }} onClick={() => handleCardClick('volunteers')} className="bg-white dark:bg-[#1F2937] p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-[#374151] flex flex-col transition-all cursor-pointer hover:shadow-lg hover:border-emerald-200 dark:hover:border-emerald-800">
             <div className="text-gray-500 dark:text-gray-400 font-medium mb-1">Total Volunteers</div>
             <div className="text-3xl font-bold text-gray-900 dark:text-white">{safeVolunteers.length}</div>
-          </div>
-          <div className="bg-red-50 dark:bg-red-900/20 p-6 rounded-2xl shadow-sm border border-red-100 dark:border-red-800/30 flex flex-col transition-colors">
+          </motion.div>
+          <motion.div whileHover={{ y: -5 }} onClick={() => handleCardClick('critical')} className="bg-red-50 dark:bg-red-900/20 p-6 rounded-2xl shadow-sm border border-red-100 dark:border-red-800/30 flex flex-col transition-all cursor-pointer hover:shadow-lg hover:shadow-red-500/10 hover:border-red-300 dark:hover:border-red-700">
             <div className="text-red-600 dark:text-red-400 font-medium mb-1">Critical (High Urgency)</div>
             <div className="text-3xl font-bold text-red-700 dark:text-red-300">{safeRequests.filter(r => r.urgency === 'High').length}</div>
-          </div>
-          <div className="bg-emerald-50 dark:bg-emerald-900/20 p-6 rounded-2xl shadow-sm border border-emerald-100 dark:border-emerald-800/30 flex flex-col transition-colors">
+          </motion.div>
+          <motion.div whileHover={{ y: -5 }} onClick={() => handleCardClick('cities')} className="bg-emerald-50 dark:bg-emerald-900/20 p-6 rounded-2xl shadow-sm border border-emerald-100 dark:border-emerald-800/30 flex flex-col transition-all cursor-pointer hover:shadow-lg hover:shadow-emerald-500/10 hover:border-emerald-300 dark:hover:border-emerald-700">
             <div className="text-emerald-600 dark:text-emerald-400 font-medium mb-1">Matched Cities</div>
             <div className="text-3xl font-bold text-emerald-700 dark:text-emerald-300">
               {new Set([...safeRequests.map(r => (r.city || '').toLowerCase()), ...safeVolunteers.map(v => (v.city || '').toLowerCase())]).size}
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Tabs */}
-        <div className="flex border-b border-gray-200 mb-6">
+        <div id="tabs-section" className="flex border-b border-gray-200 mb-6">
           <button
             onClick={() => setActiveTab('patients')}
             className={`py-4 px-6 text-center font-medium text-sm transition-all relative ${activeTab === 'patients' ? 'text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}

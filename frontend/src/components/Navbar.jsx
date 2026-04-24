@@ -17,6 +17,24 @@ const Navbar = () => {
   const [activities, setActivities] = React.useState([]);
   const [showNotifications, setShowNotifications] = React.useState(false);
   const [lastReadTime, setLastReadTime] = React.useState(new Date(0).toISOString());
+  const notifRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (notifRef.current && !notifRef.current.contains(e.target)) {
+        setShowNotifications(false);
+      }
+    };
+    const handleEsc = (e) => {
+      if (e.key === 'Escape') setShowNotifications(false);
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEsc);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEsc);
+    };
+  }, []);
 
   React.useEffect(() => {
     const fetchActivities = async () => {
@@ -94,7 +112,7 @@ const Navbar = () => {
                 )}
               </Link>
             ))}
-              <div className="relative">
+              <div className="relative" ref={notifRef}>
                 <button
                   onClick={() => setShowNotifications(!showNotifications)}
                   className="p-2 rounded-full text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors relative bg-gray-100 dark:bg-[#1F2937] focus:outline-none"
@@ -112,13 +130,21 @@ const Navbar = () => {
                       initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }}
                       className="absolute right-0 mt-2 w-80 bg-white dark:bg-[#1F2937] rounded-xl shadow-xl border border-gray-100 dark:border-[#374151] overflow-hidden z-50"
                     >
-                      <div className="px-4 py-3 border-b border-gray-100 dark:border-[#374151] font-semibold text-gray-900 dark:text-white flex justify-between">
-                        Notifications
-                        {unreadCount > 0 && <span className="text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded-full">{unreadCount} New</span>}
+                      <div className="px-4 py-3 border-b border-gray-100 dark:border-[#374151] font-semibold text-gray-900 dark:text-white flex justify-between items-center">
+                        <div className="flex items-center gap-2">
+                          Notifications
+                          {unreadCount > 0 && <span className="text-[10px] bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 px-2 py-0.5 rounded-full">{unreadCount} New</span>}
+                        </div>
+                        {activities.length > 0 && (
+                          <button onClick={() => setLastReadTime(new Date().toISOString())} className="text-xs text-blue-600 dark:text-blue-400 hover:underline">Mark all read</button>
+                        )}
                       </div>
                       <div className="max-h-80 overflow-y-auto">
                         {activities.length === 0 ? (
-                          <div className="p-4 text-sm text-gray-500 dark:text-gray-400 text-center">No new notifications</div>
+                          <div className="p-8 text-sm text-gray-500 dark:text-gray-400 flex flex-col items-center justify-center gap-2">
+                            <Bell className="w-8 h-8 opacity-20" />
+                            <p>No new notifications</p>
+                          </div>
                         ) : (
                           activities.slice(0, 5).map(act => (
                             <div key={act.id} className="p-4 border-b border-gray-50 dark:border-[#374151] hover:bg-gray-50 dark:hover:bg-[#374151]/50 transition-colors flex gap-3">
