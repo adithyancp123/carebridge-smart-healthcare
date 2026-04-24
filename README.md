@@ -1,99 +1,132 @@
-<div align="center">
-  <img src="frontend/public/icons.svg" alt="CareBridge Logo" width="100"/>
-  <h1>CareBridge Smart Healthcare</h1>
-  <p><strong>Bridging the gap to life-saving healthcare using predictive geo-routing AI.</strong></p>
-</div>
+# CareBridge Smart Healthcare
+
+> Bridging the gap between patients in urgent need and verified volunteers through intelligent healthcare support workflows.
+
+![React](https://img.shields.io/badge/Frontend-React%2019-blue)
+![Node.js](https://img.shields.io/badge/Backend-Node.js-green)
+![Express](https://img.shields.io/badge/API-Express-black)
+![TailwindCSS](https://img.shields.io/badge/UI-TailwindCSS-38BDF8)
+![Status](https://img.shields.io/badge/Build-Production%20Ready-success)
 
 ---
 
-## 🚀 Overview
+## 📌 Overview
 
-**CareBridge** is a premium, production-grade healthcare platform designed to connect critical patients with verified medical volunteers instantly. Built with a responsive React frontend and a robust Node/Express backend, the system utilizes a proprietary predictive geo-routing matching algorithm to ensure rapid, location-aware medical intervention.
+**CareBridge Smart Healthcare** is a full-stack healthcare assistance platform built to support NGOs, volunteer organizations, and emergency support teams.
 
-## ✨ Key Features
+The platform enables:
 
-- **Automated Triage Engine:** Instantly parses incoming requests to assign dynamic urgency scores (High, Medium, Low).
-- **Geo-Routing Matching AI:** Intelligently maps the nearest verified medical professionals (Doctors, Nurses, Drivers) to patients based on live city data.
-- **Real-Time Polling & Notifications:** Instant cross-platform alerts for high-priority requests without heavy websocket payloads.
-- **Enterprise Analytics Dashboard:** Built-in interactive Recharts analyzing requests by city, required skills, and urgency distribution.
-- **One-Click Export Logic:** Seamless native CSV generation and PDF extraction for local NGO offline record-keeping.
-- **Premium Dark Mode Architecture:** Flawless True Navy (`#0B1220`) theme integration powered by CSS Variables and Tailwind JIT.
+- Patients to request urgent healthcare assistance
+- Volunteers to register their availability and skills
+- Administrators to monitor requests in real time
+- Smart priority handling for emergency cases
+- Analytics-driven decision making
 
-## 💻 Tech Stack
+CareBridge is designed with a modern product mindset, combining premium UI/UX with practical workflow automation.
 
-**Frontend:**
-- **Framework**: React 19 + Vite
-- **Styling**: Tailwind CSS v4, Framer Motion
-- **Data Visualization**: Recharts
-- **Icons**: Lucide React
-- **Document Generation**: jsPDF, jsPDF-AutoTable
+---
 
-**Backend:**
-- **Framework**: Node.js + Express
-- **Data Persistence**: Lightweight JSON file system architecture
-- **Middleware**: CORS, native body parsers
+## ✨ Core Features
 
-## 📸 Platform Previews
+### 🏥 Patient Support System
+Users can submit healthcare assistance requests with urgency level, city, medical need, and contact details.
 
-> *Placeholders for your deployment screenshots*
-> - **[Screenshot 1: The Predictive Dashboard]**
-> - **[Screenshot 2: Real-time Form Intake]**
-> - **[Screenshot 3: True Navy Dark Mode]**
+### 🤝 Volunteer Registration
+Doctors, nurses, drivers, caretakers, and helpers can register their availability.
 
-## ⚙️ Local Setup
+### 🧠 Smart Priority Engine
+Requests are automatically prioritized based on urgency and medical keywords.
 
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/adithyancp123/carebridge-smart-healthcare.git
-   cd carebridge-smart-healthcare
-   ```
+Examples:
 
-2. **Start the Backend**
-   ```bash
-   cd backend
-   npm install
-   node server.js
-   ```
-   *(Server starts on port 5000)*
+- Blood required urgently
+- Surgery support needed
+- Oxygen required
+- Emergency transport
 
-3. **Start the Frontend**
-   ```bash
-   cd ../frontend
-   npm install
-   npm run dev
-   ```
-   *(Client starts on port 5173)*
+### 📊 Admin Dashboard
+A centralized control panel with:
 
-## 🌍 Deployment Strategy
+- Total requests
+- Total volunteers
+- Critical requests
+- Live metrics
+- Search & filters
+- Status tracking
 
-CareBridge is optimized for immediate zero-config deployment.
+### 📈 Analytics Center
+Interactive charts for:
 
-- **Frontend (Vercel):** The `frontend/vercel.json` file ensures that React Router's single-page application structure works flawlessly in production.
-- **Backend (Render):** The `backend/render.yaml` configuration is ready to map your Node service seamlessly. 
+- Requests by city
+- Urgency distribution
+- Volunteer skill categories
+- Status breakdown
 
-## 📂 Architecture
+### 📁 Export System
+Admins can export data instantly:
+
+- CSV Reports
+- PDF Summaries
+
+### 🌙 Premium Dark Mode
+Production-grade theme engine with:
+
+- Persistent theme preference
+- No flash on load
+- Fully themed charts, cards, forms, and navbar
+
+### 🔔 Notifications & Activity Feed
+Track platform activity in real time:
+
+- New patient requests
+- Volunteer joins
+- Priority alerts
+- Request resolution updates
+
+---
+
+## 🚀 Tech Stack
+
+## Frontend
+
+- React 19
+- Vite
+- Tailwind CSS v4
+- Framer Motion
+- Recharts
+- Lucide React
+- jsPDF
+
+## Backend
+
+- Node.js
+- Express.js
+- JSON File Storage
+- REST API Architecture
+- CORS Enabled
+
+---
+
+## 🧱 Project Architecture
 
 ```text
 carebridge-smart-healthcare/
+│
 ├── backend/
-│   ├── server.js          # Express entry point
-│   ├── data.json          # Persistent file storage
-│   └── package.json       # Backend dependencies
+│   ├── server.js
+│   ├── data.json
+│   └── package.json
+│
 ├── frontend/
 │   ├── src/
-│   │   ├── components/    # Reusable UI widgets
-│   │   ├── pages/         # Core application views
-│   │   ├── index.css      # Tailwind & Global Theme CSS
-│   │   ├── main.jsx       # React DOM root
-│   │   └── api.js         # Axios interceptors & proxy config
-│   ├── vite.config.js     # Dev server proxy routing
-│   └── vercel.json        # Production routing rule
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── api.js
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   └── index.css
+│   │
+│   ├── vite.config.js
+│   └── package.json
+│
 └── README.md
-```
-
-## 🌟 Why This Project Stands Out
-
-CareBridge is not just a CRUD application. It demonstrates an understanding of **production-grade engineering principles**: 
-- **Defensive Programming:** The UI handles backend failures gracefully via semantic fallbacks. 
-- **Design Systems:** A robust CSS token system manages the global Dark Mode without flash-of-unstyled-content (FOUC).
-- **Optimization:** Array parsing and local caching techniques prevent heavy DOM re-renders during analytics aggregation.
