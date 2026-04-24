@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
 
 :root {
   --primary: #2563eb;
@@ -12,11 +14,11 @@
 }
 
 html.dark {
-  --bg-color: #111827; /* gray-900 */
-  --text-main: #f9fafb;
-  --text-muted: #9ca3af;
-  --card-bg: #1f2937; /* gray-800 */
-  --border-color: #374151; /* gray-700 */
+  --bg-color: #0B1220; 
+  --text-main: #F9FAFB;
+  --text-muted: #9CA3AF;
+  --card-bg: #1F2937; 
+  --border-color: #374151; 
 }
 
 body {
@@ -48,7 +50,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .form-input {
-  @apply w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition duration-200 bg-white/50 dark:bg-gray-900/80 backdrop-blur-sm text-gray-900 dark:text-white;
+  @apply w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-[#374151] focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition duration-200 bg-white/50 dark:bg-[#111827]/80 backdrop-blur-sm text-gray-900 dark:text-white;
 }
 
 .form-label {

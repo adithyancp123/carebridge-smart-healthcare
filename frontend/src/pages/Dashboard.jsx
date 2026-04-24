@@ -96,7 +96,7 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-[calc(100vh-64px)] flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+      <div className="min-h-[calc(100vh-64px)] flex items-center justify-center bg-gray-50 dark:bg-[#0B1220]">
         <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-blue-600 border-t-transparent"></div>
       </div>
     );
@@ -127,7 +127,7 @@ const Dashboard = () => {
   const COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
 
   return (
-    <div className="min-h-[calc(100vh-64px)] bg-gray-50 dark:bg-gray-900 py-10 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+    <div className="min-h-[calc(100vh-64px)] bg-gray-50 dark:bg-[#0B1220] py-10 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Admin Dashboard</h1>
@@ -142,14 +142,14 @@ const Dashboard = () => {
                 placeholder="Search by name or city..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 w-full form-input bg-white dark:bg-gray-800 dark:text-white dark:border-gray-700 shadow-sm focus:ring-blue-500"
+                className="pl-10 w-full form-input bg-white dark:bg-[#1F2937] dark:text-white dark:border-[#374151] shadow-sm focus:ring-blue-500"
               />
             </div>
             <div className="flex gap-2 w-full sm:w-auto">
-              <button onClick={() => exportCSV('patients')} className="flex items-center justify-center gap-2 px-4 py-2.5 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 text-sm font-medium border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm whitespace-nowrap">
+              <button onClick={() => exportCSV('patients')} className="flex items-center justify-center gap-2 px-4 py-2.5 bg-white dark:bg-[#1F2937] text-gray-700 dark:text-gray-200 text-sm font-medium border border-gray-200 dark:border-[#374151] rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm whitespace-nowrap">
                 <Download className="w-4 h-4 text-blue-500" /> Patients CSV
               </button>
-              <button onClick={() => exportCSV('volunteers')} className="flex items-center justify-center gap-2 px-4 py-2.5 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 text-sm font-medium border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm whitespace-nowrap">
+              <button onClick={() => exportCSV('volunteers')} className="flex items-center justify-center gap-2 px-4 py-2.5 bg-white dark:bg-[#1F2937] text-gray-700 dark:text-gray-200 text-sm font-medium border border-gray-200 dark:border-[#374151] rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm whitespace-nowrap">
                 <Download className="w-4 h-4 text-emerald-500" /> Volunteers CSV
               </button>
             </div>
@@ -157,23 +157,23 @@ const Dashboard = () => {
         </div>
 
         {/* Advanced Filters */}
-        <div className="flex flex-wrap items-center gap-4 mb-8 p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm transition-colors">
+        <div className="flex flex-wrap items-center gap-4 mb-8 p-4 bg-white dark:bg-[#1F2937] rounded-xl border border-gray-100 dark:border-[#374151] shadow-sm transition-colors">
           <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 font-medium">
             <Filter className="w-4 h-4" /> Filters:
           </div>
-          <select value={filterCity} onChange={e => setFilterCity(e.target.value)} className="text-sm border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-1.5 bg-gray-50 dark:bg-gray-900 text-gray-700 dark:text-gray-300 outline-none">
+          <select value={filterCity} onChange={e => setFilterCity(e.target.value)} className="text-sm border border-gray-200 dark:border-[#374151] rounded-lg px-3 py-1.5 bg-gray-50 dark:bg-[#0B1220] text-gray-700 dark:text-gray-300 outline-none">
             <option value="">All Cities</option>
             {allCities.map(c => <option key={c} value={c}>{c}</option>)}
           </select>
           {activeTab === 'patients' && (
             <>
-              <select value={filterUrgency} onChange={e => setFilterUrgency(e.target.value)} className="text-sm border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-1.5 bg-gray-50 dark:bg-gray-900 text-gray-700 dark:text-gray-300 outline-none">
+              <select value={filterUrgency} onChange={e => setFilterUrgency(e.target.value)} className="text-sm border border-gray-200 dark:border-[#374151] rounded-lg px-3 py-1.5 bg-gray-50 dark:bg-[#0B1220] text-gray-700 dark:text-gray-300 outline-none">
                 <option value="">All Urgencies</option>
                 <option value="High">High</option>
                 <option value="Medium">Medium</option>
                 <option value="Low">Low</option>
               </select>
-              <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)} className="text-sm border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-1.5 bg-gray-50 dark:bg-gray-900 text-gray-700 dark:text-gray-300 outline-none">
+              <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)} className="text-sm border border-gray-200 dark:border-[#374151] rounded-lg px-3 py-1.5 bg-gray-50 dark:bg-[#0B1220] text-gray-700 dark:text-gray-300 outline-none">
                 <option value="">All Statuses</option>
                 <option value="Pending">Pending</option>
                 <option value="Assigned">Assigned</option>
@@ -182,7 +182,7 @@ const Dashboard = () => {
             </>
           )}
           {activeTab === 'volunteers' && (
-            <select value={filterSkill} onChange={e => setFilterSkill(e.target.value)} className="text-sm border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-1.5 bg-gray-50 dark:bg-gray-900 text-gray-700 dark:text-gray-300 outline-none">
+            <select value={filterSkill} onChange={e => setFilterSkill(e.target.value)} className="text-sm border border-gray-200 dark:border-[#374151] rounded-lg px-3 py-1.5 bg-gray-50 dark:bg-[#0B1220] text-gray-700 dark:text-gray-300 outline-none">
               <option value="">All Skills</option>
               <option value="Doctor">Doctor</option>
               <option value="Nurse">Nurse</option>
@@ -198,11 +198,11 @@ const Dashboard = () => {
 
         {/* Metric Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col transition-colors">
+          <div className="bg-white dark:bg-[#1F2937] p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-[#374151] flex flex-col transition-colors">
             <div className="text-gray-500 dark:text-gray-400 font-medium mb-1">Total Requests</div>
             <div className="text-3xl font-bold text-gray-900 dark:text-white">{safeRequests.length}</div>
           </div>
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col transition-colors">
+          <div className="bg-white dark:bg-[#1F2937] p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-[#374151] flex flex-col transition-colors">
             <div className="text-gray-500 dark:text-gray-400 font-medium mb-1">Total Volunteers</div>
             <div className="text-3xl font-bold text-gray-900 dark:text-white">{safeVolunteers.length}</div>
           </div>
@@ -255,17 +255,17 @@ const Dashboard = () => {
             {activeTab === 'patients' ? (
               <motion.div key="patients" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-4">
                 {filteredRequests.length === 0 ? (
-                  <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-2xl border border-dashed border-gray-300 dark:border-gray-700">
+                  <div className="text-center py-12 bg-white dark:bg-[#1F2937] rounded-2xl border border-dashed border-gray-300 dark:border-[#374151]">
                     <p className="text-gray-500 dark:text-gray-400">No patient requests found</p>
                   </div>
                 ) : (
                   filteredRequests.map((req, i) => (
-                    <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }} key={req.id} className={`bg-white dark:bg-gray-800 p-6 rounded-2xl border-l-4 shadow-sm hover:shadow-md transition-all ${req.urgency === 'High' ? 'border-l-red-500' : req.urgency === 'Medium' ? 'border-l-yellow-500' : 'border-l-blue-500'} dark:border-y-gray-700 dark:border-r-gray-700`}>
+                    <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }} key={req.id} className={`bg-white dark:bg-[#1F2937] p-6 rounded-2xl border-l-4 shadow-sm hover:shadow-md transition-all ${req.urgency === 'High' ? 'border-l-red-500' : req.urgency === 'Medium' ? 'border-l-yellow-500' : 'border-l-blue-500'} dark:border-y-gray-700 dark:border-r-gray-700`}>
                       <div className="flex justify-between items-start mb-4 flex-wrap gap-2">
                         <div>
                           <h3 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
                             {req.name} <span className="text-gray-500 dark:text-gray-400 text-sm font-normal">({req.age}y)</span>
-                            {req.ticketId && <span className="text-xs font-mono bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded border border-gray-200 dark:border-gray-600">{req.ticketId}</span>}
+                            {req.ticketId && <span className="text-xs font-mono bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded border border-gray-200 dark:border-[#374151]">{req.ticketId}</span>}
                           </h3>
                           <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400 text-sm mt-1">
                             <MapPin className="w-4 h-4" /> {req.city}
@@ -284,14 +284,14 @@ const Dashboard = () => {
                               ${req.status === 'Resolved' ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400' : req.status === 'Assigned' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400' : 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400'}
                             `}
                           >
-                            <option value="Pending" className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white">Pending</option>
-                            <option value="Assigned" className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white">Assigned</option>
-                            <option value="Resolved" className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white">Resolved</option>
+                            <option value="Pending" className="bg-white dark:bg-[#1F2937] text-gray-900 dark:text-white">Pending</option>
+                            <option value="Assigned" className="bg-white dark:bg-[#1F2937] text-gray-900 dark:text-white">Assigned</option>
+                            <option value="Resolved" className="bg-white dark:bg-[#1F2937] text-gray-900 dark:text-white">Resolved</option>
                           </select>
                         </div>
                       </div>
                       
-                      <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 mb-4 border border-gray-100 dark:border-gray-700 relative overflow-hidden">
+                      <div className="bg-gray-50 dark:bg-[#1F2937]/50 rounded-xl p-4 mb-4 border border-gray-100 dark:border-[#374151] relative overflow-hidden">
                         <div className="absolute top-0 left-0 w-1 h-full bg-blue-300 dark:bg-blue-500"></div>
                         <p className="text-gray-800 dark:text-gray-200 italic font-medium leading-relaxed">"{req.summary}"</p>
                       </div>
@@ -303,7 +303,7 @@ const Dashboard = () => {
                         </div>
                       )}
 
-                      <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400 border-t border-gray-100 dark:border-gray-700 pt-4">
+                      <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400 border-t border-gray-100 dark:border-[#374151] pt-4">
                         <div className="flex items-center gap-1.5"><HeartPulse className="w-4 h-4 text-blue-500" /> <strong>Need:</strong> {req.medicalNeed}</div>
                         <div className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-gray-400" /> {new Date(req.timestamp).toLocaleString()}</div>
                       </div>
@@ -314,17 +314,17 @@ const Dashboard = () => {
             ) : activeTab === 'volunteers' ? (
               <motion.div key="volunteers" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-4">
                 {filteredVolunteers.length === 0 ? (
-                  <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-2xl border border-dashed border-gray-300 dark:border-gray-700">
+                  <div className="text-center py-12 bg-white dark:bg-[#1F2937] rounded-2xl border border-dashed border-gray-300 dark:border-[#374151]">
                     <p className="text-gray-500 dark:text-gray-400">No volunteers found</p>
                   </div>
                 ) : (
                   filteredVolunteers.map((vol, i) => (
-                    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }} key={vol.id} className="bg-white dark:bg-gray-800 p-6 rounded-2xl border-l-4 border-l-emerald-500 shadow-sm hover:shadow-md transition-all dark:border-y-gray-700 dark:border-r-gray-700">
+                    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }} key={vol.id} className="bg-white dark:bg-[#1F2937] p-6 rounded-2xl border-l-4 border-l-emerald-500 shadow-sm hover:shadow-md transition-all dark:border-y-gray-700 dark:border-r-gray-700">
                       <div className="flex justify-between items-start mb-4">
                         <div>
                           <h3 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
                             {vol.name}
-                            {vol.ticketId && <span className="text-xs font-mono bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded border border-gray-200 dark:border-gray-600">{vol.ticketId}</span>}
+                            {vol.ticketId && <span className="text-xs font-mono bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded border border-gray-200 dark:border-[#374151]">{vol.ticketId}</span>}
                           </h3>
                           <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400 text-sm mt-1">
                             <MapPin className="w-4 h-4" /> {vol.city}
@@ -340,7 +340,7 @@ const Dashboard = () => {
                         <p className="text-gray-800 dark:text-gray-200 italic font-medium leading-relaxed">"{vol.summary}"</p>
                       </div>
 
-                      <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400 border-t border-gray-100 dark:border-gray-700 pt-4">
+                      <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400 border-t border-gray-100 dark:border-[#374151] pt-4">
                         <div className="flex items-center gap-1.5"><strong className="text-gray-700 dark:text-gray-300">Available:</strong> {vol.availability}</div>
                         <div className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-gray-400" /> {new Date(vol.timestamp).toLocaleString()}</div>
                       </div>
@@ -358,7 +358,7 @@ const Dashboard = () => {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Chart 1: City */}
-                  <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
+                  <div className="bg-white dark:bg-[#1F2937] p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-[#374151]">
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Requests by City</h3>
                     <div className="h-64">
                       <ResponsiveContainer width="100%" height="100%">
@@ -373,7 +373,7 @@ const Dashboard = () => {
                   </div>
                   
                   {/* Chart 2: Urgency */}
-                  <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
+                  <div className="bg-white dark:bg-[#1F2937] p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-[#374151]">
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Requests by Urgency</h3>
                     <div className="h-64">
                       <ResponsiveContainer width="100%" height="100%">
@@ -389,7 +389,7 @@ const Dashboard = () => {
                   </div>
 
                   {/* Chart 3: Skills */}
-                  <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
+                  <div className="bg-white dark:bg-[#1F2937] p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-[#374151]">
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Volunteer Skills</h3>
                     <div className="h-64">
                       <ResponsiveContainer width="100%" height="100%">
@@ -405,7 +405,7 @@ const Dashboard = () => {
                   </div>
 
                   {/* Chart 4: Status */}
-                  <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
+                  <div className="bg-white dark:bg-[#1F2937] p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-[#374151]">
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Request Status</h3>
                     <div className="h-64">
                       <ResponsiveContainer width="100%" height="100%">
@@ -421,7 +421,7 @@ const Dashboard = () => {
                 </div>
 
                 {/* Activity Timeline */}
-                <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 mt-8">
+                <div className="bg-white dark:bg-[#1F2937] p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-[#374151] mt-8">
                   <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6">Activity Timeline</h3>
                   <div className="space-y-6">
                     {activities.slice(0, 10).map((act, idx) => (

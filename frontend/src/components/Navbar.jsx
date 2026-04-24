@@ -56,7 +56,7 @@ const Navbar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="sticky top-0 z-50 glass-card bg-white/80 dark:bg-gray-900/80 border-b border-gray-100 dark:border-gray-800 transition-colors duration-300">
+    <nav className="sticky top-0 z-50 glass-card bg-white/80 dark:bg-[#0B1220]/80 border-b border-gray-100 dark:border-[#374151] transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
@@ -97,7 +97,7 @@ const Navbar = () => {
               <div className="relative">
                 <button
                   onClick={() => setShowNotifications(!showNotifications)}
-                  className="p-2 rounded-full text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors relative bg-gray-100 dark:bg-gray-800 focus:outline-none"
+                  className="p-2 rounded-full text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors relative bg-gray-100 dark:bg-[#1F2937] focus:outline-none"
                 >
                   <Bell className="w-5 h-5" />
                   {unreadCount > 0 && (
@@ -110,9 +110,9 @@ const Navbar = () => {
                   {showNotifications && (
                     <motion.div
                       initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }}
-                      className="absolute right-0 mt-2 w-80 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden z-50"
+                      className="absolute right-0 mt-2 w-80 bg-white dark:bg-[#1F2937] rounded-xl shadow-xl border border-gray-100 dark:border-[#374151] overflow-hidden z-50"
                     >
-                      <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-700 font-semibold text-gray-900 dark:text-white flex justify-between">
+                      <div className="px-4 py-3 border-b border-gray-100 dark:border-[#374151] font-semibold text-gray-900 dark:text-white flex justify-between">
                         Notifications
                         {unreadCount > 0 && <span className="text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded-full">{unreadCount} New</span>}
                       </div>
@@ -121,7 +121,7 @@ const Navbar = () => {
                           <div className="p-4 text-sm text-gray-500 dark:text-gray-400 text-center">No new notifications</div>
                         ) : (
                           activities.slice(0, 5).map(act => (
-                            <div key={act.id} className="p-4 border-b border-gray-50 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors flex gap-3">
+                            <div key={act.id} className="p-4 border-b border-gray-50 dark:border-[#374151] hover:bg-gray-50 dark:hover:bg-[#374151]/50 transition-colors flex gap-3">
                               <div className="mt-0.5">
                                 {act.type === 'alert' ? <AlertCircle className="w-4 h-4 text-red-500" /> :
                                  act.type === 'user-plus' ? <UserPlus className="w-4 h-4 text-emerald-500" /> :
@@ -142,7 +142,7 @@ const Navbar = () => {
 
             <button
               onClick={() => setIsDark(!isDark)}
-              className="p-2 rounded-full text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors bg-gray-100 dark:bg-gray-800 focus:outline-none overflow-hidden"
+              className="p-2 rounded-full text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors bg-gray-100 dark:bg-[#1F2937] focus:outline-none overflow-hidden"
             >
               <motion.div
                 initial={false}
@@ -182,7 +182,7 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass-card dark:bg-gray-900/90 border-t border-gray-100 dark:border-gray-800 overflow-hidden"
+            className="md:hidden glass-card dark:bg-[#0B1220]/90 border-t border-gray-100 dark:border-[#374151] overflow-hidden"
           >
             <div className="px-4 pt-2 pb-4 space-y-1">
               {links.map((link) => (
@@ -202,7 +202,7 @@ const Navbar = () => {
               <div className="px-3 py-3">
                 <button
                   onClick={() => setIsDark(!isDark)}
-                  className="flex items-center justify-between w-full px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
+                  className="flex items-center justify-between w-full px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-[#1F2937]"
                 >
                   <span className="flex items-center gap-2">
                     <motion.div animate={{ rotate: isDark ? 180 : 0 }} transition={{ duration: 0.3 }}>

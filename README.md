@@ -1,93 +1,99 @@
-# CareBridge - Healthcare NGO Platform
-
-![CareBridge Cover](https://via.placeholder.com/1200x400/1e3a8a/ffffff?text=CareBridge+Healthcare+Support+Platform)
-
-CareBridge is a production-ready, full-stack web application designed for Healthcare NGOs. It serves as a rapid-response bridging platform that seamlessly connects patients in critical need with nearby available medical volunteers (Doctors, Nurses, Drivers, Caretakers). 
-
-Built with modern engineering principles, it features AI-powered intelligent request summarization, automated city-based volunteer matching, and a highly polished startup-grade UI.
-
-## 🌟 Why This Project Stands Out (For Engineering Recruiters)
-- **Advanced State Management**: Clean React architectural flow utilizing hooks and strict component modularity.
-- **Micro-Animations**: Extensive use of Framer Motion for premium user interactions and routing transitions.
-- **Smart Algorithm Integration**: Implemented a dynamic matching engine that actively correlates patient geographic data with volunteer availability.
-- **Live Impact Architecture**: The dashboard and home page utilize polling to display real-time live statistics and automated emergency banners, proving an understanding of real-time event-driven UX.
-- **Vite & Tailwind v4 Ecosystem**: Showcases proficiency in the absolute latest front-end tooling ecosystems for scalable development.
-
-## 🚀 Key Highlights & Features
-
-1. **Intelligent Automation (AI-Powered Engine)**:
-   - **Smart Summarization**: Form submissions are instantly processed into intelligent, human-readable summaries (e.g., *"CRITICAL: Patient request from Thrissur. A 65-year-old requires immediate assistance regarding: Cardiac arrest."*).
-   - **Real-Time Volunteer Matching**: Automatically scans the volunteer database to find and suggest an available match in the same city as the patient.
-
-2. **Premium Frontend Architecture**:
-   - Built with **React 19** and **Vite** for blazing fast performance.
-   - Designed using **Tailwind CSS v4** with a bespoke Glassmorphism NGO theme (Deep Blues and Emerald Greens).
-   - Fluid micro-animations and route transitions powered by **Framer Motion**.
-   - Elegant toast notification system for form feedback.
-
-3. **Robust Backend & Dashboard**:
-   - **Node.js / Express** REST API.
-   - Dedicated Admin Dashboard featuring interactive tabs, real-time search filtering, and metric counter cards.
-
-## 📸 Screenshots
-
-*(Screenshots can be found in the `/screenshots` directory)*
-- **Homepage:** `screenshots/homepage.png`
-- **Patient Form:** `screenshots/patient-form.png`
-- **Volunteer Form:** `screenshots/volunteer-form.png`
-- **Dashboard:** `screenshots/dashboard.png`
-
-## 🛠️ Tech Stack
-
-- **Frontend**: React, Vite, Tailwind CSS v4, Framer Motion, React Router v7, React Hot Toast, Lucide React, Axios.
-- **Backend**: Node.js, Express, CORS, File System (`fs`) for lightweight JSON persistence.
-
-## ⚙️ Local Setup & Run Instructions
-
-This project requires [Node.js](https://nodejs.org/) to be installed.
-
-### 1. Start the Backend API
-
-1. Open a terminal and navigate to the `backend` directory:
-   ```bash
-   cd backend
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the server (runs on `http://localhost:5000`):
-   ```bash
-   npm start
-   ```
-
-### 2. Start the Frontend Client
-
-1. Open a new terminal and navigate to the `frontend` directory:
-   ```bash
-   cd frontend
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the Vite development server (runs on `http://localhost:5173`):
-   ```bash
-   npm run dev
-   ```
-
-## 🌐 Deployment Guidelines
-
-The project is structured to be deployment-ready. 
-
-**Frontend (Vercel / Netlify)**:
-- Build command: `npm run build`
-- Output directory: `dist`
-- *Note:* Add an environment variable `VITE_API_URL` pointing to your hosted backend URL.
-
-**Backend (Render / Heroku)**:
-- Start command: `node server.js`
-- *Note on Data Persistence:* The current backend uses a local `data.json` file. Serverless platforms (like Vercel functions) have ephemeral file systems and will reset this file on every cold start. For production, host the Node.js app on a service with a persistent disk (like Render) or replace `fs` logic with a managed database like MongoDB.
+<div align="center">
+  <img src="frontend/public/icons.svg" alt="CareBridge Logo" width="100"/>
+  <h1>CareBridge Smart Healthcare</h1>
+  <p><strong>Bridging the gap to life-saving healthcare using predictive geo-routing AI.</strong></p>
+</div>
 
 ---
-*Developed as a premier Full-Stack Developer Internship Submission.*
+
+## 🚀 Overview
+
+**CareBridge** is a premium, production-grade healthcare platform designed to connect critical patients with verified medical volunteers instantly. Built with a responsive React frontend and a robust Node/Express backend, the system utilizes a proprietary predictive geo-routing matching algorithm to ensure rapid, location-aware medical intervention.
+
+## ✨ Key Features
+
+- **Automated Triage Engine:** Instantly parses incoming requests to assign dynamic urgency scores (High, Medium, Low).
+- **Geo-Routing Matching AI:** Intelligently maps the nearest verified medical professionals (Doctors, Nurses, Drivers) to patients based on live city data.
+- **Real-Time Polling & Notifications:** Instant cross-platform alerts for high-priority requests without heavy websocket payloads.
+- **Enterprise Analytics Dashboard:** Built-in interactive Recharts analyzing requests by city, required skills, and urgency distribution.
+- **One-Click Export Logic:** Seamless native CSV generation and PDF extraction for local NGO offline record-keeping.
+- **Premium Dark Mode Architecture:** Flawless True Navy (`#0B1220`) theme integration powered by CSS Variables and Tailwind JIT.
+
+## 💻 Tech Stack
+
+**Frontend:**
+- **Framework**: React 19 + Vite
+- **Styling**: Tailwind CSS v4, Framer Motion
+- **Data Visualization**: Recharts
+- **Icons**: Lucide React
+- **Document Generation**: jsPDF, jsPDF-AutoTable
+
+**Backend:**
+- **Framework**: Node.js + Express
+- **Data Persistence**: Lightweight JSON file system architecture
+- **Middleware**: CORS, native body parsers
+
+## 📸 Platform Previews
+
+> *Placeholders for your deployment screenshots*
+> - **[Screenshot 1: The Predictive Dashboard]**
+> - **[Screenshot 2: Real-time Form Intake]**
+> - **[Screenshot 3: True Navy Dark Mode]**
+
+## ⚙️ Local Setup
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/adithyancp123/carebridge-smart-healthcare.git
+   cd carebridge-smart-healthcare
+   ```
+
+2. **Start the Backend**
+   ```bash
+   cd backend
+   npm install
+   node server.js
+   ```
+   *(Server starts on port 5000)*
+
+3. **Start the Frontend**
+   ```bash
+   cd ../frontend
+   npm install
+   npm run dev
+   ```
+   *(Client starts on port 5173)*
+
+## 🌍 Deployment Strategy
+
+CareBridge is optimized for immediate zero-config deployment.
+
+- **Frontend (Vercel):** The `frontend/vercel.json` file ensures that React Router's single-page application structure works flawlessly in production.
+- **Backend (Render):** The `backend/render.yaml` configuration is ready to map your Node service seamlessly. 
+
+## 📂 Architecture
+
+```text
+carebridge-smart-healthcare/
+├── backend/
+│   ├── server.js          # Express entry point
+│   ├── data.json          # Persistent file storage
+│   └── package.json       # Backend dependencies
+├── frontend/
+│   ├── src/
+│   │   ├── components/    # Reusable UI widgets
+│   │   ├── pages/         # Core application views
+│   │   ├── index.css      # Tailwind & Global Theme CSS
+│   │   ├── main.jsx       # React DOM root
+│   │   └── api.js         # Axios interceptors & proxy config
+│   ├── vite.config.js     # Dev server proxy routing
+│   └── vercel.json        # Production routing rule
+└── README.md
+```
+
+## 🌟 Why This Project Stands Out
+
+CareBridge is not just a CRUD application. It demonstrates an understanding of **production-grade engineering principles**: 
+- **Defensive Programming:** The UI handles backend failures gracefully via semantic fallbacks. 
+- **Design Systems:** A robust CSS token system manages the global Dark Mode without flash-of-unstyled-content (FOUC).
+- **Optimization:** Array parsing and local caching techniques prevent heavy DOM re-renders during analytics aggregation.

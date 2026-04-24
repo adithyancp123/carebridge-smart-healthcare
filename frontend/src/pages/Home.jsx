@@ -58,13 +58,13 @@ const Home = () => {
   const itemVariants = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } } };
 
   return (
-    <div className="flex flex-col min-h-[calc(100vh-64px)] overflow-hidden bg-gradient-to-br from-blue-50 via-white to-emerald-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-300">
+    <div className="flex flex-col min-h-[calc(100vh-64px)] overflow-hidden bg-gradient-to-br from-blue-50 via-white to-emerald-50 dark:from-[#0B1220] dark:via-[#111827] dark:to-[#0B1220] transition-colors duration-300">
       
       {showBanner && (
-        <motion.div initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }} className="bg-red-600 text-white px-4 py-3 text-center shadow-lg relative z-50 flex items-center justify-center gap-2">
+        <motion.div initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }} className="bg-red-600 dark:bg-[#450a0a] dark:border-b dark:border-[#7f1d1d] text-white dark:text-[#fca5a5] px-4 py-3 text-center shadow-lg relative z-50 flex items-center justify-center gap-2 transition-colors">
           <AlertTriangle className="w-5 h-5 animate-pulse" />
           <span className="font-bold">Active Emergencies:</span> There are <Counter end={stats.emergencies} duration={1} /> high-priority patient requests needing immediate attention. 
-          <Link to="/volunteer" className="underline font-bold ml-2 hover:text-red-200">Help Now</Link>
+          <Link to="/volunteer" className="underline font-bold ml-2 hover:text-red-200 dark:hover:text-white">Help Now</Link>
         </motion.div>
       )}
 
@@ -111,9 +111,9 @@ const Home = () => {
 
           {/* Trust Badges */}
           <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-6 mb-12 text-sm font-semibold text-gray-500 dark:text-gray-400">
-            <div className="flex items-center gap-2 bg-white dark:bg-gray-800 px-4 py-2 rounded-full border border-gray-200 dark:border-gray-700 shadow-sm"><Shield className="w-4 h-4 text-emerald-500" /> End-to-End Encrypted</div>
-            <div className="flex items-center gap-2 bg-white dark:bg-gray-800 px-4 py-2 rounded-full border border-gray-200 dark:border-gray-700 shadow-sm"><CheckCircle className="w-4 h-4 text-blue-500" /> Verified Volunteers Only</div>
-            <div className="flex items-center gap-2 bg-white dark:bg-gray-800 px-4 py-2 rounded-full border border-gray-200 dark:border-gray-700 shadow-sm"><HeartPulse className="w-4 h-4 text-rose-500" /> Emergency Priority Routing</div>
+            <div className="flex items-center gap-2 bg-white dark:bg-[#1F2937] px-4 py-2 rounded-full border border-gray-200 dark:border-[#374151] shadow-sm"><Shield className="w-4 h-4 text-emerald-500" /> End-to-End Encrypted</div>
+            <div className="flex items-center gap-2 bg-white dark:bg-[#1F2937] px-4 py-2 rounded-full border border-gray-200 dark:border-[#374151] shadow-sm"><CheckCircle className="w-4 h-4 text-blue-500" /> Verified Volunteers Only</div>
+            <div className="flex items-center gap-2 bg-white dark:bg-[#1F2937] px-4 py-2 rounded-full border border-gray-200 dark:border-[#374151] shadow-sm"><HeartPulse className="w-4 h-4 text-rose-500" /> Emergency Priority Routing</div>
           </motion.div>
 
           {/* Animated Stats Counters */}
@@ -126,7 +126,7 @@ const Home = () => {
       </section>
 
       {/* Testimonials / Impact */}
-      <section className="bg-white dark:bg-gray-900 py-20 border-t border-gray-100 dark:border-gray-800 relative overflow-hidden transition-colors duration-300">
+      <section className="bg-white dark:bg-[#0B1220] py-20 border-t border-gray-100 dark:border-[#374151] relative overflow-hidden transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Real World Impact</h2>
@@ -150,7 +150,7 @@ const Home = () => {
       </section>
 
       {/* How It Works Section */}
-      <section className="bg-gray-50 dark:bg-gray-800/50 py-20 border-t border-gray-200 dark:border-gray-800 transition-colors duration-300">
+      <section className="bg-gray-50 dark:bg-[#111827]/50 py-20 border-t border-gray-200 dark:border-[#374151] transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">How CareBridge Works</h2>
@@ -165,7 +165,7 @@ const Home = () => {
         </div>
       </section>
 
-      <footer className="bg-gray-900 text-gray-400 py-10 text-center border-t border-gray-800">
+      <footer className="bg-gray-900 dark:bg-[#080d17] text-gray-400 py-10 text-center border-t border-gray-800 dark:border-[#374151]">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-center items-center gap-2 mb-4 text-blue-400">
             <HeartPulse className="w-6 h-6" /><span className="text-xl font-bold text-white">CareBridge</span>
@@ -178,7 +178,7 @@ const Home = () => {
 };
 
 const StatCard = ({ icon, title, value, suffix = "", className = "" }) => (
-  <div className={`bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border border-gray-200 dark:border-gray-700 p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-lg transition-all ${className}`}>
+  <div className={`bg-white/90 dark:bg-[#1F2937]/90 backdrop-blur-md border border-gray-200 dark:border-[#374151] p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-lg transition-all ${className}`}>
     <div className="flex items-center justify-center gap-2 mb-3">{icon}<span className="font-semibold text-sm uppercase tracking-wider text-gray-500 dark:text-gray-400">{title}</span></div>
     <div className="text-5xl font-extrabold text-gray-900 dark:text-white flex justify-center items-baseline">
       <Counter end={value} duration={1.5} />{suffix}
@@ -187,10 +187,10 @@ const StatCard = ({ icon, title, value, suffix = "", className = "" }) => (
 );
 
 const ImpactCard = ({ quote, author, role, location }) => (
-  <motion.div whileHover={{ y: -5 }} className="bg-white dark:bg-gray-800 p-8 rounded-3xl shadow-md border border-gray-100 dark:border-gray-700 flex flex-col justify-between">
+  <motion.div whileHover={{ y: -5 }} className="bg-white dark:bg-[#1F2937] p-8 rounded-3xl shadow-md border border-gray-100 dark:border-[#374151] flex flex-col justify-between">
     <div className="text-blue-600 dark:text-blue-400 opacity-20 mb-4"><svg className="w-12 h-12" fill="currentColor" viewBox="0 0 32 32"><path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-2.2 1.8-4 4-4V8zm16 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-2.2 1.8-4 4-4V8z"></path></svg></div>
     <p className="text-xl text-gray-700 dark:text-gray-300 italic leading-relaxed mb-8">"{quote}"</p>
-    <div className="flex items-center gap-4 border-t border-gray-100 dark:border-gray-700 pt-4">
+    <div className="flex items-center gap-4 border-t border-gray-100 dark:border-[#374151] pt-4">
       <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-emerald-100 dark:from-blue-900/50 dark:to-emerald-900/50 rounded-full flex items-center justify-center text-blue-700 dark:text-blue-400 font-bold text-lg">{author.charAt(0)}</div>
       <div>
         <div className="font-bold text-gray-900 dark:text-white">{author}</div>
@@ -201,8 +201,8 @@ const ImpactCard = ({ quote, author, role, location }) => (
 );
 
 const FeatureCard = ({ icon, title, desc, delay }) => (
-  <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.5, delay }} whileHover={{ y: -5 }} className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl border border-gray-200 dark:border-gray-700 p-8 rounded-3xl hover:shadow-xl transition-all duration-300">
-    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800 flex items-center justify-center mb-6 shadow-inner border border-gray-200 dark:border-gray-600">{icon}</div>
+  <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.5, delay }} whileHover={{ y: -5 }} className="bg-white/80 dark:bg-[#1F2937]/80 backdrop-blur-xl border border-gray-200 dark:border-[#374151] p-8 rounded-3xl hover:shadow-xl transition-all duration-300">
+    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 dark:from-[#111827] dark:to-[#1F2937] flex items-center justify-center mb-6 shadow-inner border border-gray-200 dark:border-[#374151]">{icon}</div>
     <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{title}</h3>
     <p className="text-gray-600 dark:text-gray-400 leading-relaxed">{desc}</p>
   </motion.div>
